@@ -1,0 +1,15 @@
+<div [ngClass]="data.type" class="confirmation-dialog__title">
+  <div id="conf-title" class="confirmation-dialog__title-wrapper">
+    <mat-icon *ngIf="data.type === 'progress' || data.type === 'info'" >info</mat-icon>
+    <mat-icon *ngIf="data.type !== 'progress' && data.type !== 'info'">warning</mat-icon>
+    <h3>{{ data.title }}</h3>
+  </div>
+</div>
+<div class="confirmation-dialog__content">
+  <div id="conf-content" mat-dialog-content>{{ data.content }}</div>
+  <mat-progress-bar mode="indeterminate" *ngIf="data.type === 'progress'" class="confirmation-dialog__progress"></mat-progress-bar>
+</div>
+<div mat-dialog-actions *ngIf="data.acceptText || data.declineText" align="end" class="confirmation-dialog__actions">
+  <button id="conf-cancel-btn" mat-button mat-dialog-close *ngIf="data.declineText" class="btn__secondary">{{ data.declineText }}</button>
+  <button id="conf-confirm-btn" mat-button *ngIf="data.acceptText" class="btn__secondary" (click)="confirm()">{{ data.acceptText }}</button>
+</div>

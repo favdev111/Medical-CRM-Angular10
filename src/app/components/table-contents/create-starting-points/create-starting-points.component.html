@@ -1,0 +1,11 @@
+<div class="create-starting-points">
+  <mat-form-field class="create-starting-points__select" appearance="fill">
+    <mat-label>Starting Points</mat-label>
+    <mat-select disableOptionCentering [(value)]="currentStartingPoint" panelClass="create-starting-points__panel" (selectionChange)="handleSelection($event)" name="startingPoints">
+      <mat-option isFocused="false" value="CREATE_NEW">Create new starting point</mat-option>
+      <mat-option isFocused="currentStartingPoint.id === startingPoint.id" *ngFor="let startingPoint of startingPoints" [value]="startingPoint">
+        {{ startingPoint.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>

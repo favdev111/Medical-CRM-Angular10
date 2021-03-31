@@ -1,0 +1,23 @@
+<div class="graph-container">
+    <div id="scene" #scene class="graph-block" width="2000" height="2000" #svg [hidden]="showEditor"  ></div>
+    <br/>
+    <div id="zoomInOutContainer" [hidden]="showEditor">
+        <div id="zoomInOut">
+            <button id="zoomOut" #zoomOut (click)="zoomToggle(false)">
+                <img src="./assets/zoom-out.svg" ></button>
+            <button id="currentZoom" #currentZoom>{{currentZoomLevel * 100}}%</button>
+            <button id="zoomIn" #zoomIn class="transparent-button" (click)="zoomToggle(true)">
+                <img src="./assets/zoom-in.svg" ></button>   
+            <button id="zoomFit" #zoomFit class="transparent-button" (click)="zoomfit()">
+                <img src="./assets/fit-on-screen.svg" >
+            </button>     
+        </div>
+    </div>
+    <app-update-status-component [guidelineVersionId]="guidelineVersionId" [isPreviewMode]="isPreviewMode" [isReviewMode]="isReviewMode"></app-update-status-component>
+    <div class="tooltop"> Please select a destination textbox</div>
+
+    <ng-container *ngIf="showEditor">
+        <app-create-starting-points [nodeId]="currentNode.id"></app-create-starting-points>
+        <app-text-editor [left]="left" [top]="top" [currentNode]="currentNode" (cancel)="toggleTextEditor()"></app-text-editor>
+    </ng-container>    
+</div>

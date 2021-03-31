@@ -1,0 +1,30 @@
+<div id="updateStatusBtnContainer" *ngIf="(isPreviewMode || isReviewMode) && !(currentGuidelineStatus$ | async | isGuidelineStatus: 'PUBLISHED')">
+  <ng-container *ngIf="currentGuidelineStatus$ | async | isGuidelineStatus: 'DRAFT'; else publish">
+    <button id="openReviewBtn" mat-button mat-raised-button  class="btn__primary update-status-btn" (click)="updateStatusDialogService.openStatusChangeDialog('REVIEW', guidelineVersionId, guidelineTypeId)" cdkFocusInitial>Send for Approval</button> 
+  </ng-container>
+
+  <ng-template #publish>
+    <button 
+      id="sendToDraftBtn"
+      mat-button
+      class="btn__clear update-status-btn"
+      [disabled]="!(currentGuidelineStatus$ | async | isGuidelineStatus: 'READY_TO_BE_PUBLISHED')"
+      (click)="updateStatusDialogService.openStatusChangeDialog('DRAFT', guidelineVersionId, guidelineTypeId)" 
+      cdkFocusInitial
+    >
+      <img class="update-status-btn__icon" src="{{!(currentGuidelineStatus$ | async | isGuidelineStatus: 'READY_TO_BE_PUBLISHED') ? './assets/edit-grey-19-px.svg' : './assets/edit-blue-19-px.svg'}}" />
+      Edit
+    </button> 
+    <button
+      id="openPublishBtn"
+      mat-button
+      class="btn__clear update-status-btn"
+      [disabled]="!(currentGuidelineStatus$ | async | isGuidelineStatus: 'READY_TO_BE_PUBLISHED')"
+      (click)="updateStatusDialogService.openStatusChangeDialog('PUBLISHED', guidelineVersionId, guidelineTypeId)"
+      cdkFocusInitial
+    >
+      <img class="update-status-btn__icon" src="{{!(currentGuidelineStatus$ | async | isGuidelineStatus: 'READY_TO_BE_PUBLISHED') ? './assets/publish-grey-19-px.svg' : './assets/publish-blue-19-px.svg'}}" />
+      Publish
+    </button> 
+  </ng-template>
+</div>

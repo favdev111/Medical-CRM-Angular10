@@ -1,0 +1,12 @@
+{
+  "extends": "../tsconfig.app.json",
+  "compilerOptions": {
+    "outDir": "../dist/out-tsc",
+    "rootDir": ".",
+    "module": "commonjs",
+    "target": "es5",
+    "types": ["node"],
+    "resolveJsonModule": true
+  },
+  "include": ["**/*.ts"]
+}

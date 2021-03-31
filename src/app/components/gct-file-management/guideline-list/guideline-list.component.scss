@@ -1,0 +1,174 @@
+// Note, alignment of column width is very touchy when having nested expandable table
+// The width of the arrow column, content columns, and action columns plus padding add up to 100%
+
+@import '../../../../variables';
+
+::ng-deep .mat-sort-header-container:not(.mat-sort-header-sorted) .mat-sort-header-arrow {
+  opacity: 0.54 !important;
+  transform: translateY(0px) !important;
+}
+
+/* Structure */
+.guideline-list {
+  position: relative;
+  min-height: 200px;
+
+  &__table-container {
+    position: relative;
+    max-height: 65vh;
+    overflow: auto;
+    width: 100%;
+  }
+
+  &__progress-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.15);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+table {
+  width: 100%;
+}
+
+tr.detail-row {
+  height: 0;
+}
+
+tr.element-row:not(.expanded-row):active {
+  background: #efefef;
+}
+
+.detail-row {
+  border-bottom: 1px solid black;
+}
+
+.detail-row td,
+.element-row:last-of-type > td,
+.mat-footer-cell,
+.inner-table .mat-header-cell:nth-of-type(1),
+.inner-table .mat-header-cell:nth-of-type(2),
+.inner-table .mat-header-cell:last-of-type  {
+  border-bottom-width: 0;
+}
+
+.inner-table {
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.element-detail {
+  overflow: hidden;
+}
+
+.mat-header-cell {
+  font-size: $small-font;
+  font-weight: $font-weight-medium;
+  line-height: $line-height-xl;
+  letter-spacing: $letter-spacing-xs;
+  color: $dark-text;
+}
+
+.mat-cell {
+  font-size: $xs-font;
+  line-height: $line-height-lg;
+  letter-spacing: $letter-spacing-md;
+  color: $light-text;
+}
+
+td.mat-column-arrow, td.mat-column-innerArrow {
+  width: 5%;
+  padding-left: 1% !important;
+}
+
+td.mat-column-actions, th.mat-column-innerCancerType {
+  position: relative;
+}
+
+.half-border-left  {
+  border-left: 1px solid #e0e0e0;
+  position: absolute;
+  top: 7px;
+  bottom: 7px;
+  left: 0px;
+}
+
+.half-border-bottom-right {
+  border-bottom: 1px solid #e0e0e0;
+  position: absolute;
+  width: 20%;
+  right: 0px;
+  bottom: 0px;
+}
+
+td.mat-column-actions, td.mat-column-innerActions {
+  width: 16%;
+}
+
+.mat-cell:last-of-type, .mat-header-cell:last-of-type {
+  text-align: center;
+  padding-right: 0;
+}
+
+.inner-table {
+  .mat-cell {
+    border-bottom: none;
+  }
+}
+
+.fixed-cell {
+  // Aligns child table rows and cells
+  width: 12%;
+}
+
+.mat-footer-row {
+  height: 50px;
+}
+
+.review-user {
+
+  &__list-item {
+    list-style: none;
+    padding: 0.2rem 0;
+
+    &__status {
+      font-weight: $font-weight-bold;
+    }
+  }
+
+  &__progress-bar {
+    display: flex;
+    align-items: center;
+
+    span {
+      padding-right: 0.3rem;
+    }
+  }
+}
+
+.review-status {
+  display: flex;
+  align-items: flex-start;
+
+  &__circle {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+
+    &-warning {
+      background-color: $dark-warning;
+    }
+
+    &-success {
+      background-color: $green;
+    }
+  }
+}
+

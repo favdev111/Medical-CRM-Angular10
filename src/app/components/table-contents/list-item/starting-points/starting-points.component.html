@@ -1,0 +1,11 @@
+<div *ngIf="nodes && nodes.length" class="starting-point">
+  <app-starting-point *ngFor="let node of nodes | slice:0:2" [node]="node">
+  </app-starting-point>
+  <button mat-icon-button *ngIf="nodes.length > 2" mat-button [matMenuTriggerFor]="showMoreMenu">
+    <img src="./assets/horiz-ellipses.svg">
+  </button>
+  <mat-menu #showMoreMenu="matMenu" xPosition="before" yPosition="above" class="starting-points__menu-panel">
+    <app-starting-point *ngFor="let node of nodes | slice:2" [node]="node">
+    </app-starting-point>
+  </mat-menu>
+</div>

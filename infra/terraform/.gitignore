@@ -1,0 +1,7 @@
+
+#terraform runs
+/.terraform/*
+
+# System Files
+.DS_Store
+Thumbs.db

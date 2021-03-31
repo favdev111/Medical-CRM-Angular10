@@ -1,0 +1,17 @@
+@import '../../../variables';
+
+.alert-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  justify-self: center;
+
+  &__icon {
+    padding-right: 1rem;
+  }
+
+  button {
+    margin-left: auto;
+  }
+}

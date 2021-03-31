@@ -1,0 +1,10 @@
+
+<mat-expansion-panel class="mat-elevation-z0" expandedHeight="auto">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <span class="comments__circle" appRandomColor [reviewUserId]="reviewUserId"></span>
+      <span class="comments__display-name"> {{ userDisplayName }} </span>
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+  <app-comment-list-item *ngFor="let comment of comments" [comment]="comment" (onSetExpandedComment)="setExpandedComment($event)"></app-comment-list-item>
+</mat-expansion-panel>

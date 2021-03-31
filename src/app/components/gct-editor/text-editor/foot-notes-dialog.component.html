@@ -1,0 +1,43 @@
+<p id="dialog-title" class="dialog__title">Add Footnotes</p>
+<div class="foot-notes-dialog">
+  <mat-dialog-content>
+    <div class="foot-notes-dialog__fields">
+      <mat-form-field>
+        <mat-label id="footnote-reference-label">Footnote Reference</mat-label>
+        <input
+          id="footnote-reference-input"
+          [value]="footnoteRef"
+          (input)="footnoteRef = $event.target.value"
+          matInput
+          required/>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label id="footnote-text-label">Footnote Text</mat-label>
+        <input
+          id="footnote-text"
+          [value]="footnoteText"
+          (input)="footnoteText = $event.target.value"
+          matInput/>
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button
+      id="CN-dialog-cancel-btn"
+      mat-button
+      mat-raised-button
+      mat-dialog-close
+      class="btn__secondary">
+      CANCEL
+    </button>
+    <button
+      id="CN-dialog-create-btn"
+      mat-button
+      mat-raised-button
+      (click)="submit()"
+      class="btn__primary"
+      [disabled]="footnoteRef === '' || footnoteText === ''">
+      SAVE
+    </button>
+  </mat-dialog-actions>
+</div>

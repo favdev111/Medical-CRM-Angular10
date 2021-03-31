@@ -1,0 +1,128 @@
+@import '../../../../variables';
+
+.text-editor{
+  width:96%;
+  margin: auto;
+  text-align: center;
+}
+
+.foot-notes{
+  width:96%;
+  max-height: 150px;
+  overflow-y: auto;
+  display: flex;
+  flex: 1 1 auto;
+  margin: auto; 
+  border: solid 1px #bebebe;
+  border-top:none;
+  box-sizing: border-box;
+  &__container{
+    width: 100%;
+    padding: 10px;
+    margin:auto;
+    font-family: Roboto; 
+    font-size: 12px; 
+    letter-spacing: 0.4px; 
+    color: rgba(0, 0, 0, 0.87);
+  }
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  .foot-notes-content{
+    font-family: Roboto;
+    font-size: 12px !important;
+    font-weight: normal;
+    letter-spacing: 0.4px;
+    color: rgba(0, 0, 0, 0.6);
+    .footnoteList{
+      display: inline-block;
+    }
+  }
+}
+
+.tox-tinymce{
+  border: 0px !important;
+}
+.editor{
+  width:98%;
+
+  &__actions {
+    float: right;
+    margin: 15px auto;
+
+    .btn__secondary {
+      margin-right: 16px;
+    }
+  }
+}
+
+.title-container{
+  width: 90%;
+}
+
+.title{
+  margin-left: 30px;
+  font-size: $medium-font;
+  letter-spacing: $letter-spacing-lg;
+  color: $dark-text;
+  font-weight: normal;
+}
+
+#edit-node-title {
+  margin-top: 0;
+}
+
+.text-editor ::ng-deep .tox-toolbar__primary {
+  background-color: #f5f5f5 !important;
+  background-image: none;
+
+  .tox-toolbar__group:last-of-type {
+    margin-left: auto;
+  }
+}
+
+
+.mat-dialog-container {
+  padding-bottom: 0 !important;
+}
+
+.mat-dialog-content {
+  width: 100%;
+}
+
+.foot-notes-dialog {
+
+  padding: 0rem 2.2rem 0.5rem 2.2rem;
+
+  &__btn {
+    margin: 1rem;
+  }
+
+  &__btn-wrapper {
+    background-color: rgba(0, 102, 204, 0.12);
+    width: 50%;
+    padding: 1rem;
+  
+    span {
+      padding-left: 1.5rem;
+      line-height: $line-height-lg;
+      letter-spacing: $letter-spacing-lg;
+      color: $dark-text;
+      font-size: $medium-font;
+    }
+
+  }
+
+  &__fields {
+    justify-content: flex-start;
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1 1 auto;
+
+    .mat-form-field {
+      width: 90%;
+      margin: auto 2%;
+    }
+  }
+}

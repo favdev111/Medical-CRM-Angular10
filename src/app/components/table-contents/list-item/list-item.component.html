@@ -1,0 +1,12 @@
+<div class="list-item" [ngClass]="{'bottom-border': isEditMode, 'bottom-border-color drop-cursor': isFocused}">
+  <p *ngIf="!isEditMode; else editMode" class="list-item__text">{{ item.name }}</p>
+
+  <ng-template #editMode>
+    <input class="list-item__input" (blur)="toggleFocus(false)" (focus)="toggleFocus(true)" [value]="currentName" (input)="currentName=$event.target.value">
+    <button class="list-item__delete-icon" mat-icon-button aria-label="Delete Starting Point" (click)="delete()">
+      <img class="icon-group__icon" src="./assets/system-icon-outlined-icons-edit-icon-remove.svg" />
+    </button>
+  </ng-template>
+
+  <app-starting-points *ngIf="!isEditMode" [item]="item"></app-starting-points>
+</div>

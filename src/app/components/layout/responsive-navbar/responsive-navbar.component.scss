@@ -1,0 +1,33 @@
+.mat-toolbar {
+    background: none;
+    background-color: white;
+    border-bottom: 1px solid #d3d3d3;
+    box-shadow: 0 3px 5px -3px rgba(10, 10, 10, 0.3);
+    height: 63px;
+  }
+
+  .text-settings {
+    //margin-right: -35%;
+    position: flex;
+    
+    height: 15px;
+    font-family: Roboto;
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: 0.5px;
+    color: rgba(0, 0, 0, 0.87);
+  }
+
+  .app-name{
+    font-family: Roboto;
+    font-size: 24px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: normal;
+    color: rgba(0, 0, 0, 0.87);
+  }

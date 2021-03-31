@@ -1,0 +1,10 @@
+{
+  "apiKey": "WSS_API_KEY",
+  "productToken": "5526e4ff9d174f86a048e94362395ec00dc082ea615e4db9ace7a9056563e575",
+  "checkPolicies": false,
+  "forceUpdate": false,
+
+  "projectName": "cds-guidelines-config-tool-ui",
+  "devDep": false,
+  "ignoreNpmLsErrors": true
+}

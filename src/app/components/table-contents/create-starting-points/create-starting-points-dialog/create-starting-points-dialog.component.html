@@ -1,0 +1,10 @@
+
+<p>Create new starting point</p>
+<div class="create-starting-points__input-wrapper">
+  <input id="create-starting-points__input" [value]="name" (input)="name=$event.target.value" placeholder="Starting point" required>
+</div>
+<div class="create-starting-points__actions" fxLayout="row" fxLayoutAlign="end center">
+  <button id="CN-dialog-cancel-btn" mat-button mat-dialog-close class="btn__tertiary">Cancel</button>
+  <button id="CN-dialog-create-btn" mat-button (click)="save()" class="btn__tertiary" [disabled]="name === ''">Save</button>
+</div>
+

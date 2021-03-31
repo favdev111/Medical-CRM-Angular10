@@ -1,0 +1,32 @@
+<div class="table-contents-wrapper">
+  <p id="table-contents-title" class="table-contents__title">Comments</p>
+
+  <ng-container *ngIf="expandedNodeComments.length === 0; else showExpandedComments">
+    <div class="comments__section-wrapper">
+      <p class="table-contents__section">
+        <span *ngIf="activeFilter">{{ currentComments }} / </span>
+        <span>{{ totalComments }} comments</span>
+      </p>
+      <button mat-button [matMenuTriggerFor]="filterMenu">
+        <img src="./assets/filter-24-px-blue.svg"/>
+      </button>
+    </div> 
+    <mat-menu #filterMenu="matMenu">
+      <button mat-menu-item activeFilter [currentFilter]="activeFilter" [filter]="acceptedFilter" (click)="this.setFilterType(acceptedFilter)">Accepted</button>
+      <button mat-menu-item activeFilter [currentFilter]="activeFilter" [filter]="deniedFilter" (click)="this.setFilterType(deniedFilter)">Rejected</button>
+      <button mat-menu-item activeFilter [currentFilter]="activeFilter" [filter]="null" (click)="this.setFilterType()">None</button>
+    </mat-menu>
+    <mat-accordion multi>
+      <ng-container *ngFor="let item of commentsGroupedByUser | keyvalue; index as i; trackBy:trackByFn">
+        <app-comment-group (onSetExpandedComment)="setExpandedComments($event)" [comments]="item.value" [reviewUserId]="item.value[0].reviewUserId" [userDisplayName]="item.key"></app-comment-group>
+      </ng-container>
+    </mat-accordion>
+  </ng-container>
+
+  <ng-template #showExpandedComments>
+    <button mat-icon-button aria-label="Back to all comments button" (click)="setExpandedComments()">
+      <mat-icon>chevron_left</mat-icon>
+    </button>
+    <app-expanded-comment *ngFor="let comment of expandedNodeComments" (onUpdateNodeCommentStatus)="updateNodeCommentStatus($event)" [comment]="comment"></app-expanded-comment>
+  </ng-template>
+</div>

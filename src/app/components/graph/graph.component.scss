@@ -1,0 +1,96 @@
+@import '../../../variables';
+.graph-container{
+  outline: 0 !important;
+  min-height: 100vh;
+  rect {
+    fill:white;
+    stroke:silver;
+    width: 80px;
+    height: 40px;
+    stroke-width: 2;
+  } 
+  
+  path {
+    fill: none;
+    stroke:silver;
+    stroke-width:2;
+  }
+  text {
+    dominant-baseline: middle;
+    text-anchor:middle;
+  }
+  .bigger {
+    font-size: 20px;
+  }
+  #details {
+    position: absolute;
+    left: 320px;
+    top: 120px;
+    width: 200px;
+    height: 30px;
+    background: gray;
+    color: white;
+    visibility: hidden;
+    border-radius: 15px;
+    text-align: center;
+    padding: 15px;
+    font-size: 20px;
+  }
+  
+  .graph-block {
+    margin-bottom: 40px;
+  }
+  
+  .tooltop {
+    display: none;
+    padding: 4px 8px;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.87);
+    border-radius: 4px;
+    width: 216px;
+    height: 24px;
+    margin: 7px 0 199px 3px;
+    color: rgba(255, 255, 255, 0.87);
+    font-family: Roboto;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.33;
+    letter-spacing: 0.4px;
+  }
+
+  #zoomInOutContainer {
+    position:fixed;
+    bottom: 5px;
+    z-index: 1000;
+    margin: auto;
+    text-align: center;
+    width: 100%;
+    font-family: Roboto;
+    font-size: 12px;
+    font-weight: normal;
+    #zoomIn, #zoomOut, #currentZoom, #zoomFit {
+      width: 48px;
+      height: 48px;
+      border: 1px solid silver; 
+      border-radius:4px 0px 0px 0px;
+      background-color: #ffffff;
+      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+    }
+    #zoomIn{
+      margin-left: 48px; 
+      border-radius:0px 4px 0px 0px;
+    }
+    #currentZoom {
+      position:fixed;
+      bottom: 5px;
+      border-radius:0px;
+      color: rgba(0, 0, 0, 0.6);  
+    }
+    #zoomFit{
+      margin-left: 25px;
+      border-radius:0px;
+    }
+  }
+}

@@ -1,0 +1,195 @@
+/* You can add global styles to this file, and also import other style files */
+@import "./_variables";
+
+html, body { 
+  height: 100%;
+  margin: 0; 
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: 0.5px;
+  color: rgba(0, 0, 0, 0.87);
+  background-color: #f5f5f5;
+  -ms-overflow-style:none;
+  scrollbar-width: none;
+}
+
+body::-webkit-scrollbar, body::-webkit-scrollbar-button {
+  display: none;
+}
+
+foreignObject body {
+  background: none;
+  overflow: hidden;
+}
+
+.btn {
+  border-radius: 4px;
+
+  :disabled {
+    cursor: not-allowed;
+  }
+
+  &__primary {
+    background: $primary;
+    color: $secondary;
+    text-transform: uppercase;
+  }
+
+  &__secondary {
+    background: $secondary;
+    color: $primary;
+    text-transform: uppercase;
+  }
+
+  &__tertiary {
+    background: none;
+    color: $primary;
+    text-transform: uppercase;
+  }
+
+  &__clear {
+    background: none;
+    color: $primary;
+    text-transform: uppercase;
+    border: solid 1px $grey-scroll !important;
+  }
+}
+
+.mat-progress-spinner circle, .mat-spinner circle {
+  stroke: $primary;
+}
+
+.mat-form-field.mat-focused {
+
+  .mat-form-field-label, .mat-select-arrow {
+    color: $primary !important;
+  }
+}
+
+.mat-select-panel .mat-option.mat-selected:not(.mat-option-multiple) {
+  background: $light-blue !important;
+}
+
+.mat-option.mat-selected:not(.mat-option-disabled) {
+  color: $primary !important;
+}
+
+.create-starting-points {
+
+  &__panel {
+    margin-top: 22px;
+  }
+
+  &__dialog-panel > .mat-dialog-container {
+    overflow: hidden !important;
+  }
+}
+
+.starting-points__menu-panel {
+  min-width: 0 !important;
+  max-width: 400px !important;
+  min-height: 0 !important;
+
+  > .mat-menu-content {
+    display: flex;
+    flex-direction: row;
+    flex: 1 1 auto;
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+}
+
+.dialog {
+
+  &__title {
+    font-size: $xl-font;
+    color: $dark-text;
+    padding: 0.5rem 1rem 0.5rem 1.5rem;
+  }
+}
+
+// Styles for alerts and dialogs
+.error {
+  background-color: red;
+  color: #ffffff;
+
+  .mat-icon {
+    color: #ffffff;
+  }
+
+  button {
+    color: #ffffff;
+  }
+}
+
+.success {
+  background: $light-green;
+  color: $light-text;
+}
+
+.warning {
+  background-color: $warning; 
+  color: $light-text;
+
+  .mat-icon {
+    color: #ffb121;
+  }
+}
+
+.progress, .info {
+  background-color: $progress; 
+  color: $light-text;
+
+  .mat-icon {
+    color: $primary;
+  }
+}
+
+.mat-progress-bar-fill::after {
+  background-color: $primary;
+}
+
+.none {
+  background-color: none;
+  color: $dark-text;
+}
+
+foreignObject * {
+  margin: 0;
+}
+
+*::-webkit-scrollbar {
+  width: 14px;
+  height:14px;
+}
+*::-webkit-scrollbar-track {
+  background: $grey-scroll-track;  
+}
+*::-webkit-scrollbar-thumb {
+  background-color: $grey-scroll;
+  border-radius: 7px;  
+  -webkit-border-radius: 7px;
+  border: 0.300rem solid $grey-scroll-track;
+}
+
+.mat-drawer-content {
+  height: calc(100% - 3.3rem) !important;
+}
+
+.mat-dialog-actions {
+  padding-right: 0.5rem !important;
+}
+
+.mat-tab-header {
+  border-bottom: none;
+}
+
+.mat-tab-label {
+  padding: 0 !important;
+  min-width: 0 !important;
+  width: 25% !important;
+}

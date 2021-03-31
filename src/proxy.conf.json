@@ -1,0 +1,7 @@
+{
+  "/guidelines-config-tool-service": {
+    "target": "https://su-hi5dev.hi5dev-astack-cds-apps.hi5.cds.platform.navify.com/",
+    "secure": false,
+    "logLevel": "debug"
+  }
+}

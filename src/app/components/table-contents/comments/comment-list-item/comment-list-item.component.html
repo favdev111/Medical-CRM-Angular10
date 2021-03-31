@@ -1,0 +1,9 @@
+<mat-action-list class="comments__list-item">
+  <button mat-list-item (click)="setExpandedComment()">
+    <p class="comments__text">{{ comment.content.length > 100 ? (comment.content | slice:0:100) + '...' : comment.content }}</p>
+    <img
+      *ngIf="commentStatusImgSrc"
+      [src]="commentStatusImgSrc"
+    />
+  </button>
+</mat-action-list>

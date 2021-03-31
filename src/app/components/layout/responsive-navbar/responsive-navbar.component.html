@@ -1,0 +1,14 @@
+<mat-toolbar fxLayout="row" color="white">
+  <span fxFlex class="app-name">NAVIFY® {{appDisplayName}}</span>
+  <span class="text-settings">{{userProfileFacade.userDisplayName$ | async }} </span>
+  <div fxLayout="row" fxLayoutAlign="right">
+    <img src="./assets/roche.svg" />
+  </div>
+  <button id="logoutBtn" mat-button (click)="logout()" >
+    Logout
+  </button>
+</mat-toolbar>
+
+
+
+

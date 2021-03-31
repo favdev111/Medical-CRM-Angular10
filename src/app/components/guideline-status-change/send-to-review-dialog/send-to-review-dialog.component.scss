@@ -1,0 +1,73 @@
+@import '../../../../variables';
+
+.send-review-dialog{
+
+  #approver-mailid-input{
+    width: 513px;
+    font-family: Roboto;
+    font-size: 16px;
+    letter-spacing: 0.15px; 
+    color: rgba(0, 0, 0, 0.6);
+    input {
+      height: 20px;
+    }
+  }
+
+  ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+    color: rgba(0, 0, 0, 0.6);
+  }
+  ::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+    color: rgba(0, 0, 0, 0.6);
+  }
+  ::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-label { 
+    color: rgba(0, 0, 0, 0.6);
+  }
+
+  .mat-standard-chip {    
+    font-family: Roboto;
+    font-size: 14px;
+    letter-spacing: 0.25px;
+    color: rgba(0, 0, 0, 0.6);
+    padding: 4px 8px 4px 20px;
+    border-radius: 16px;
+    background-color: rgba(0, 0, 0, 0.12);
+
+    white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+    white-space: -pre-wrap;      /* Opera 4-6 */
+    white-space: -o-pre-wrap;    /* Opera 7 */
+    white-space: pre-wrap;       /* css-3 */
+    word-wrap: break-word;       /* Internet Explorer 5.5+ */
+    white-space: -webkit-pre-wrap; /* Newer versions of Chrome/Safari*/
+    word-break: break-all;
+    white-space: normal;
+    height: auto !important;
+  }
+  
+  #notes {
+    resize: none;
+    font-family: Roboto;
+    font-size: 16px;
+    letter-spacing: 0.15px;
+    color: rgba(0, 0, 0, 0.6);
+  }
+  #CN-dialog-cancel-btn, #CN-dialog-create-btn {
+    &:not([disabled]){
+      color: #0066cc;
+    }
+  }
+}
+
+.dialog__title {  
+  font-family: Roboto;
+  padding: 0;
+  margin-top: 0;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 0.15px;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.mat-dialog-container {
+  padding-top: 20px;
+  padding-bottom: 18px;
+}

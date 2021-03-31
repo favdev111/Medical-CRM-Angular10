@@ -1,0 +1,33 @@
+<p id="dialog-title" class="dialog__title">Send for approval</p>
+<div class="send-review-dialog">
+  <mat-dialog-content>
+    <div class="send-review-dialog__fields">
+      <mat-form-field appearance="outline" 
+      id="approver-mailid-input" >
+        <mat-label>Please add approver</mat-label>
+        <mat-chip-list #chipList aria-label="Approver Mail Ids">
+          <mat-chip *ngFor="let mailChip of mailChips" [selectable]="selectable"
+                   [removable]="removable" (removed)="remove(mailChip)">
+            {{mailChip.mailId}}
+            <img src="./assets/cancel-icon.svg" matChipRemove *ngIf="removable"/>
+          </mat-chip>
+          <input id="chip-list" [matChipInputFor]="chipList"
+                 [matChipInputSeparatorKeyCodes]="SEPARATOR_KEY_CODES"
+                 [matChipInputAddOnBlur]="addOnBlur"
+                 (matChipInputTokenEnd)="add($event)"
+                 placeholder="approver email">
+        </mat-chip-list>
+      </mat-form-field>
+      <mat-form-field appearance="outline" 
+      id="approver-mailid-input" >
+        <mat-label>Note</mat-label>
+        <textarea id="notes" #notes matInput placeholder="add notes" [value]="notesValue" maxlength="600" (input)="notesExpand($event)"></textarea>
+        <mat-hint id="char-count">Remaining characters: {{notesCharCount}}</mat-hint>
+      </mat-form-field>
+    </div>
+  </mat-dialog-content> 
+  <mat-dialog-actions align="end">
+    <button id="CN-dialog-cancel-btn" mat-button mat-dialog-close>CANCEL</button>
+    <button id="CN-dialog-create-btn" mat-button (click)="submit()" [disabled]="mailChips.length == 0">SEND</button>
+  </mat-dialog-actions>
+</div>

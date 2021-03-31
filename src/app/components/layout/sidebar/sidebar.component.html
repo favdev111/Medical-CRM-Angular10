@@ -1,0 +1,20 @@
+<mat-sidenav-container class="sidenav" [ngClass]="{'sidenav__standalone': navigationFacade.isStandAloneMode$ | async}">
+  <app-graph
+    [isReviewMode]="isReviewMode"
+    [isPreviewMode]="isPreviewMode"
+    [shouldShowComments]="shouldShowComments"
+    [guidelineId]="guidelineId"
+    [guidelineVersionId]="guidelineVersionId"
+    [nodeMap]="nodeMap"
+    [startingPointNodeIds]="startingPointNodeIds$ | async"
+    [nodeCommentMap]="nodeCommentFacade.nodeCommentMap$ | async"
+    (onSetExpandedNodeComments)="setExpandedComments($event)"
+  >
+  </app-graph>
+
+  <mat-sidenav #drawer mode="side" position="end" [opened]="navigationFacade.isSidenavOpen$ | async">
+    <div fxLayout="column" class="sidenav__content">
+      <app-table-contents [isPreviewMode]="isPreviewMode"></app-table-contents>
+    </div>
+  </mat-sidenav>
+</mat-sidenav-container>

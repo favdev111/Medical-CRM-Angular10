@@ -1,0 +1,8 @@
+<div class="alert-container">
+  <img class="alert-container__icon" *ngIf="data.type === 'success'" src="./assets/system-icon-filled-icons-alert-icon-positive.svg" />
+  <mat-icon class="alert-container__icon" *ngIf="data.type === 'error' || data.type === 'warning'">{{ data.type }}</mat-icon>
+  <span>{{ data.message }}</span>
+  <button mat-icon-button (click)="close()">
+    <mat-icon mat-button>close</mat-icon>
+  </button>
+</div>

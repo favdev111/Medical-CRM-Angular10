@@ -1,0 +1,76 @@
+
+<table id="FM-version-table" mat-table [dataSource]="dataSource" class="inner-table" matSort #innerSort="matSort">
+
+  <ng-container matColumnDef="innerArrow">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let element;">
+    </td>
+  </ng-container>
+
+  <!-- Activity -->
+  <ng-container matColumnDef="innerCancerType">
+    <th id="innerCancerType-col-head" mat-header-cell *matHeaderCellDef class="fixed-cell"> Activity <div class="half-border-bottom-right"></div></th>
+    <td id="innerCancerType-col" mat-cell *matCellDef="let element;" class="fixed-cell"></td>
+  </ng-container>
+
+  <ng-container matColumnDef="innerVersion">
+    <th id="innerVersion-col-head" mat-header-cell *matHeaderCellDef class="fixed-cell" mat-sort-header disableClear [@.disabled]="true">Version history</th>
+    <td id="innerVersion-col" mat-cell *matCellDef="let element;" class="fixed-cell">Version {{element.id === latestVersionId ? element.providerGuidelineVersion + ' (Current version)' : element.providerGuidelineVersion}}</td>
+  </ng-container>
+
+  <!-- Modified Column -->
+  <ng-container matColumnDef="innerModified">
+    <th id="innerModified-col-head" mat-header-cell *matHeaderCellDef class="fixed-cell" mat-sort-header disableClear [@.disabled]="true">Last modified</th>
+    <td id="innerModified-col" mat-cell *matCellDef="let element;" class="fixed-cell">{{element.lastModifiedDate | date: 'mediumDate'}}</td>
+  </ng-container>
+
+  <!-- Creator Column -->
+  <ng-container matColumnDef="innerCreator">
+    <th id="innerCreator-col-head" mat-header-cell *matHeaderCellDef class="fixed-cell" mat-sort-header disableClear [@.disabled]="true">Creator</th>
+    <td id="innerCreator-col" mat-cell *matCellDef="let element;" class="fixed-cell">{{ element.creatorName }}</td>
+  </ng-container>
+
+
+   <!-- Last Modified By -->
+   <!-- <ng-container matColumnDef="innerLastModifiedBy">
+    <th id="innerLastModifiedBy-col-head" mat-header-cell *matHeaderCellDef class="fixed-cell" mat-sort-header disableClear [@.disabled]="true"> Last Modified By </th>
+    <td id="innerLastModifiedBy-col" mat-cell *matCellDef="let element;" class="fixed-cell">{{ element.lastModifiedName }}</td>
+  </ng-container> -->
+
+  <!-- CreatedDate Column -->
+  <ng-container matColumnDef="innerCreated">
+    <th id="innerCreated-col-head" mat-header-cell *matHeaderCellDef class="fixed-cell" mat-sort-header disableClear [@.disabled]="true">Created</th>
+    <td id="innerCreated-col" mat-cell *matCellDef="let element;" class="fixed-cell">{{element.createdDate | date: 'mediumDate'}}</td>
+  </ng-container>
+
+  <!-- Status Detail Column -->
+  <ng-container matColumnDef="innerStatus">
+    <th id="status-col-head" mat-header-cell *matHeaderCellDef class="fixed-cell">Status Detail</th>
+    <td id="status-col" mat-cell *matCellDef="let element;" class="fixed-cell">
+      <ng-container *ngIf="element | showStatusDetail: latestVersionId; else regularStatus">
+        <li class="review-user__list-item review-user__progress-bar">
+          <span>{{ element.reviewUsers | approvedReviewCount}}</span>
+          <mat-progress-bar mode="determinate" [value]="element.reviewUsers | progressPercentage"></mat-progress-bar>
+        </li>
+        <li class="review-user__list-item" *ngFor="let reviewUser of element.reviewUsers">
+          <span class="review-user__list-item__status">{{reviewUser.reviewStatus | reviewStatus}}</span> {{reviewUser.displayName ? reviewUser.displayName : reviewUser.email }}
+        </li>
+      </ng-container>
+      <ng-template #regularStatus>
+        {{ element | guidelineStatus: latestVersionId }}
+      </ng-template>
+    </td>
+  </ng-container>
+
+
+  <!-- Actions space -->
+  <ng-container matColumnDef="innerActions">
+    <th id="innerActions-col-head" mat-header-cell *matHeaderCellDef class="fixed-cell"></th>
+    <td id="innerActions-col" mat-cell *matCellDef="let element" class="fixed-cell">
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+  <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
+
+</table>

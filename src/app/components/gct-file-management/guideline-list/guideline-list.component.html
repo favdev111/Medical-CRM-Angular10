@@ -1,0 +1,161 @@
+<div class="guideline-list">
+
+  <div 
+    class="guideline-list__progress-wrapper"
+    *ngIf="isLoading$ | async">
+    <mat-spinner *ngIf="isLoading$ | async"></mat-spinner>
+  </div>
+
+  <div class="guideline-list__table-container">
+    <table
+      id="FM-table"
+      class="outer-table"
+      mat-table
+      matSort
+      #sort="matSort"
+      [dataSource]="dataSource" multiTemplateDataRows
+    >
+      <!-- Arrow Column -->
+      <ng-container matColumnDef="arrow" sticky>
+        <th id="arrow-col-head" mat-header-cell *matHeaderCellDef></th>
+        <td id="arrow-col" mat-cell *matCellDef="let element">
+          <button
+            mat-icon-button
+            [class.expanded-row]="expandedElement === element"
+            (click)="handleExpand(element)"
+            [@detailExpandArrow]="element == expandedElement ? 'expanded' : 'collapsed'"
+          >
+            <img src="./assets/chevron-right.svg" />
+        </button>
+        </td>
+      </ng-container>
+
+      <!-- Cancer Type Column -->
+      <ng-container matColumnDef="cancerType">
+        <th id="cancerType-col-head" mat-header-cell *matHeaderCellDef class="fixed-cell" mat-sort-header disableClear [@.disabled]="true" start="asc"> Cancer Type </th>
+        <td id="cancerType-col" mat-cell *matCellDef="let element;" class="fixed-cell">
+          {{ element.guidelineType.name }}
+        </td>
+      </ng-container>
+      
+
+      <!-- Version Column -->
+      <ng-container matColumnDef="version">
+        <th id="version-col-head" mat-header-cell *matHeaderCellDef class="fixed-cell">Version (latest)</th>
+        <td id="version-col" mat-cell *matCellDef="let element;" class="fixed-cell">Version {{element.latestVersion.providerGuidelineVersion}}</td>
+      </ng-container>
+
+      <!-- Modified Column -->
+      <ng-container matColumnDef="modified">
+        <th id="modified-col-head" mat-header-cell *matHeaderCellDef class="fixed-cell">Modified</th>
+        <td id="modified-col" mat-cell *matCellDef="let element;" class="fixed-cell">{{element.latestVersion.lastModifiedDate | date: 'mediumDate'}}</td>
+      </ng-container>
+
+      <!-- Creator Column -->
+      <ng-container matColumnDef="creator">
+        <th id="creator-col-head" mat-header-cell *matHeaderCellDef class="fixed-cell">Creator</th>
+        <td id="creator-col" mat-cell *matCellDef="let element;" class="fixed-cell">{{ element.latestVersion.creatorName }}</td>
+      </ng-container>
+
+      <!-- Last Modified By Column -->
+      <!-- <ng-container matColumnDef="lastModifiedBy">
+        <th id="creator-col-head" mat-header-cell *matHeaderCellDef class="fixed-cell"> Last Modified By </th>
+        <td id="creator-col" mat-cell *matCellDef="let element;" class="fixed-cell">{{ element.latestVersion.lastModifiedName }}</td>
+      </ng-container> -->
+      
+      <!-- Created Column -->
+      <ng-container matColumnDef="created">
+        <th id="created-col-head" mat-header-cell *matHeaderCellDef class="fixed-cell">Created</th>
+        <td id="created-col" mat-cell *matCellDef="let element;" class="fixed-cell">{{element.latestVersion.createdDate | date: 'mediumDate'}}</td>
+      </ng-container>
+
+      <!-- Status Column -->
+      <ng-container matColumnDef="status">
+        <th id="status-col-head" mat-header-cell *matHeaderCellDef class="fixed-cell">Status</th>
+        <td id="status-col" mat-cell *matCellDef="let element;" class="fixed-cell">
+          <div class="review-status">
+            <span>{{ element.latestVersion | guidelineStatus }}</span>
+            <span 
+              *ngIf="element.latestVersion.reviewUsers && element.latestVersion.reviewUsers.length > 0"
+              [ngClass]="element.latestVersion | guidelineStatusCircle"
+            >
+            </span>
+          </div>
+        </td>
+      </ng-container>
+
+      <!-- Actions Column -->
+      <ng-container matColumnDef="actions">
+        <th id="actions-col-head" mat-header-cell *matHeaderCellDef>Actions</th>
+        <td id="actions-col" mat-cell *matCellDef="let element">
+          <!-- Edit -->
+          <div class="half-border-left"></div>
+          <button *ngIf="(element.latestVersion.status | actionStatus : ['DRAFT', 'RECONSIDER']); else previewOnlyMode" id="edit-guideline" mat-icon-button>
+            <img src="./assets/edit-24-px.svg" (click)="navigateToEditor(element?.latestVersion?.id, element?.guidelineType?.name, element?.latestVersion?.providerGuidelineVersion)" />
+          </button>
+          <ng-template #previewOnlyMode>
+            <button id="preview-guideline" mat-icon-button>
+              <img src="./assets/readonly.svg" (click)="navigateToEditor(element?.latestVersion?.id, element?.guidelineType?.name, element?.latestVersion?.providerGuidelineVersion)" />
+            </button>
+          </ng-template>
+          <!-- Add New Version -->
+          <button
+            *ngIf="(element.latestVersion.status | actionStatus : ['PUBLISHED'] ); else addDisabled"
+            id="add-new-version" mat-icon-button (click)="openCreateDialog(element?.guidelineType)">
+            <img src="./assets/add.svg" />
+          </button>
+          <ng-template #addDisabled>
+            <button id="add-new-version" mat-icon-button [disabled]="true">
+              <img src="./assets/add-disabled.svg" />
+            </button>
+          </ng-template>
+          <!-- Publish -->
+          <button
+            *ngIf="(element.latestVersion.status | actionStatus : ['READY_TO_BE_PUBLISHED']); else publishDisabled"
+            id="publish-guideline" mat-icon-button (click)="updateStatusDialogService.openStatusChangeDialog('PUBLISHED', element.latestVersion.id, element.guidelineType.guidelineTypeId)">
+            <img src="./assets/publish_enabled.svg" />
+          </button>
+          <ng-template #publishDisabled>
+            <button id="publish-guideline" mat-icon-button [disabled]="true">
+              <img src="./assets/publish_disabed.svg" />
+            </button>
+          </ng-template>
+          <!-- Delete -->
+          <button
+            *ngIf="(element.latestVersion.status | actionStatus : ['DRAFT'] ); else deleteDisabled"
+            id="delete-guideline" mat-icon-button>
+            <img src="./assets/trash.svg" (click)="openDeleteDialog(element?.latestVersion?.id)" />
+          </button>
+          <ng-template #deleteDisabled>
+            <button id="delete-guideline" mat-icon-button [disabled]="true">
+              <img src="./assets/trash-disabled.svg" />
+            </button>
+          </ng-template>
+        </td>
+      </ng-container>
+
+      <!-- Footer  -->
+      <ng-container matColumnDef="footer">
+        <td mat-footer-cell *matFooterCellDef colspan="columnsToDisplay.length"></td>
+      </ng-container>
+
+      <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+      <ng-container matColumnDef="expandedDetail">
+        <td *matCellDef="let element;" [attr.colspan]="columnsToDisplay.length">
+          <div class="element-detail"
+              [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+              <app-guideline-version-list [data]="element.guidelineVersions" [latestVersionId]="element.latestVersion.id"></app-guideline-version-list>
+          </div>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+      <tr mat-row *matRowDef="let element; columns: columnsToDisplay;"
+        class="element-row"
+      >
+      <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr>
+      <tr mat-footer-row *matFooterRowDef="['footer']"></tr>
+    </table>
+
+  </div>
+</div>

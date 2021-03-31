@@ -1,0 +1,178 @@
+#!groovy
+@Library('ddo-pipeline-library') _
+
+//sonar config
+project_key = 'com.roche.navify.cds-guidelines-config-tool-ui'
+project_name = '"CDS Apps: Guidelines Config Tool UI"'
+ecrUrl = "https://121749245160.dkr.ecr.us-west-2.amazonaws.com"
+current_branch = "${env.BRANCH_NAME}"
+
+develop_branch = "develop"
+release_branch = "release"
+
+artifactoryRepo="https://navify.jfrog.io/navify/navify-generic-local/cds-apps/gdl/guidelines-config-tool-ui/"
+
+
+credentialsId="disappsdeployer"
+
+properties([
+    disableConcurrentBuilds(),
+    buildDiscarder(logRotator(daysToKeepStr: '7', numToKeepStr: '10')),
+    parameters([
+        booleanParam(
+            name: 'CLEAN_NODE_MOD',
+            defaultValue: true,
+            description: 'Cleanup node_modules'
+        ),
+    ])
+])
+
+// Stages =========================
+node('docker-host') {
+
+    stage('Pre-build'){
+        cleanupWs cleanupNodeModules: params.CLEAN_NODE_MOD
+    }
+
+    timestamps {
+        try {
+            stage('Checkout') {
+                checkout scm
+            }
+            stage('Define vars'){
+                def packageJSON = readJSON file: "${WORKSPACE}/package.json"
+                projectVersion = packageJSON.version
+            }
+
+            // these docker images are configured in the same way as those in integration-tests/docker-compose.yml
+            docker.image(ecrUrl.replace("https://","")+'/ddo-jenkins-slave-node12:latest').inside('-v /root/.npmrc:/root/.npmrc') {
+                 
+                    
+                stage('npm install') {
+                    sh "npm install"
+                }
+
+                // stage('Run Lint') {
+                //     runLint()
+                // }
+
+                // stage('Run test') {
+                //     runTest()
+                // }
+
+                stage('Build') {
+                    sh "npm run build"
+                }
+
+                // stage('Sonar Analysis UI') {
+                //     sonarUIAnalysis(false)
+                // }
+
+                // if (whitesourceBranches()) {
+                //     stage('Whitesource') {
+                //         whitesource()
+                //     }
+                // }
+
+                if (shouldDeploy()) {
+                    stage('Create Package') {
+                        runCreatePackage()
+                    }
+                    
+                    stage('Publish to artifactory') {
+                        runPublish(artifactoryRepo)
+                    }
+
+                    currentBuild.displayName = "#${env.BUILD_NUMBER} - guidelines-config-tool-ui-${projectVersion}:" + read_commit_id("${WORKSPACE}")
+                }
+                    
+                
+            }
+        } catch (Exception e) {
+            println("Caught exception: " + e)
+            error = catchException exception: e
+        } finally {
+        }
+    }
+}
+
+def npmInstall(){
+    sh "npm install"
+}
+
+def npmBuild(){
+    sh "npm run build"
+}
+
+def runLint(){
+    sh "npm run lint"
+}
+
+def runTest(){
+    sh "npm run test"
+}
+
+def runCreatePackage(){
+    commit_id = read_commit_id("${WORKSPACE}")
+    zip zipFile: "guidelines-config-tool-ui-${projectVersion}-${commit_id}.zip", dir:'./dist/guidelinesConfigTool/'
+}
+
+def runPublish(repoID){
+    withCredentials([[$class : 'UsernamePasswordMultiBinding', credentialsId: credentialsId, usernameVariable: 'jfrog_user', passwordVariable: 'jfrog_token']]) {
+        sh "curl -u ${jfrog_user}:${jfrog_token} -X PUT \"${repoID}${projectVersion}/\" -T ./guidelines-config-tool-ui-${projectVersion}-${commit_id}.zip"
+    }
+}
+
+def read_commit_id(String repo_dir) {
+  def commit_id = sh(script: "${WORKSPACE}/infra/pipeline/scripts/read-commit-id.sh ${repo_dir}", returnStdout: true)
+  return commit_id.trim()
+}
+
+boolean devBranch() {
+  return current_branch == develop_branch || current_branch.endsWith("-deployable")
+}
+
+boolean standardDeployBranch() {
+  return current_branch == develop_branch || current_branch.startsWith(release_branch)
+}
+
+boolean customDeployBranch() {
+  return current_branch.endsWith("-deployable")
+}
+
+boolean shouldDeploy() {
+  return standardDeployBranch() || customDeployBranch()
+}
+
+boolean whitesourceBranches() {
+  return current_branch == develop_branch || current_branch.startsWith(release_branch)
+}
+
+def sonarUIAnalysis(boolean skip = false) {
+  if (skip) {
+    echo "Skip Sonar UI Analysis."
+    return
+  }
+  def sonarBranchParams = ''
+  def packageJSON = readJSON file: 'package.json'
+  project_version = packageJSON.version
+  if (current_branch != develop_branch) {
+        sonarBranchParams = sonarBranchParams + '-Dsonar.branch.name=' + current_branch
+    }
+  withSonarQubeEnv('SonarCloud') {
+            sh """sonar-scanner \
+                -Dsonar.projectKey=$project_key \
+                -Dsonar.projectName=$project_name \
+                -Dsonar.project.version=$project_version \
+                -Dsonar.organization=rochedis \
+                $sonarBranchParams"""
+    } 
+}
+
+def whitesource() {
+  withCredentials([string(credentialsId: 'WHITESOURCE_APPS_API_KEY', variable: 'WHITESOURCE_APPS_API_KEY')]) {
+      echo "whitesource"
+      sh "sed -i \"s/WSS_API_KEY/${WHITESOURCE_APPS_API_KEY}/g\" whitesource.config.json"
+      sh "whitesource run"
+  }
+}

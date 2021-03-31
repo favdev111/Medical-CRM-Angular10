@@ -1,0 +1,42 @@
+@import '../../../variables';
+
+::ng-deep .confirmation-dialog .mat-dialog-container {
+  padding: 0 0 8px 0;
+  // Prevent scrollbar on windows, height should be auto based on content anyways
+  overflow: hidden !important;
+}
+
+.confirmation-dialog{
+  &__content {
+    padding: 0.5rem 56px;
+    font-size: $medium-font;
+    color: $light-text;
+    line-height: $line-height-lg;
+    letter-spacing: $letter-spacing-xs;
+
+  }
+
+  &__progress {
+    margin-top:20px;
+  }
+
+  &__title {
+    width: 100%;
+
+    &-wrapper {
+      padding: 1.5rem;
+      display: flex;
+
+      h3 {
+        padding-left: 9px;
+        color: $dark-text;
+        font-size: $large-font;
+        margin: 0;
+      }
+    }
+  }
+
+  &__actions{
+    padding-bottom: 18px;
+  }
+}

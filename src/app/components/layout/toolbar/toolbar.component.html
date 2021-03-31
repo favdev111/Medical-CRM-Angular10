@@ -1,0 +1,43 @@
+<mat-toolbar [ngClass]="{'is-preview-mode': (navigationFacade.isPreviewMode$ | async) || isReviewMode}">
+  <div class="icon-group">
+    <button id="FM-back-btn"
+      mat-icon-button
+      aria-label="File Management"
+      (click)="navigateToFileManagement()"
+    >
+      <img class="icon-group__icon" src="./assets/file-management.svg" />
+    </button>
+    <span id="FM-back-label" class="icon-group__text">File Management</span>
+  </div>
+  <span id="guideline-type" class="title">{{ guidelineType }}</span>
+  <div id="appendix-btn" class="icon-group">
+    <button 
+      mat-icon-button
+      aria-label="Add Appendix"
+      (click)="addAppendixHandler()"
+    >
+      <img class="icon-group__icon" src="./assets/appendix.svg" />
+    </button>
+    <span class="icon-group__text">Appendix</span>
+  </div>
+  <div id="TOC-btn" class="icon-group">
+    <button 
+      mat-icon-button
+      aria-label="Open Table of Contents"
+      (click)="navigationFacade.toggleSidenav()"
+    >
+      <img class="icon-group__icon" src="./assets/table-contents.svg" />
+    </button>
+    <span class="icon-group__text">Table of Contents</span>
+  </div>
+  <div id="preview-btn" class="icon-group">
+    <button 
+      mat-icon-button
+      aria-label="Preview Guideline"
+      (click)="previewHandler()"
+    >
+      <img class="icon-group__icon" src="./assets/preview.svg" />
+    </button>
+    <span class="icon-group__text">Preview</span>
+  </div>
+</mat-toolbar>

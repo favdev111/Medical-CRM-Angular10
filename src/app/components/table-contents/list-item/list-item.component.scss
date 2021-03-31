@@ -1,0 +1,51 @@
+@import '../../../../variables';
+
+@mixin list-item-text {
+  font-size: $small-font;
+  letter-spacing: $letter-spacing-md;
+  color: $light-text;
+  padding: 0 0 0 14px ;
+}
+
+.list-item {
+  padding: 12px 0 3px 0;
+  display: flex;
+  justify-content: flex-start;
+  position: relative;
+  width: 100%;
+
+  &__text {
+    @include list-item-text;
+    width: 118px;
+    overflow-x: scroll;
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+  }
+
+  .list-item__text::-webkit-scrollbar {
+    display: none;
+  }
+
+  &__input {
+    @include list-item-text;
+    border: none;
+    max-width: 65%;
+  }
+
+  &__input:focus {
+    border: none;
+    outline: none;
+  }
+}
+
+.bottom-border {
+  border-bottom: 1px solid $light-text;
+}
+
+.bottom-border-color {
+  border-bottom: 1px solid $primary;
+}
+
+.drop-cursor:hover {
+  cursor: grab;
+}

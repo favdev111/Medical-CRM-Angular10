@@ -1,0 +1,35 @@
+@import ".../../../../../../_variables";
+
+// Overide Material CSS
+.mat-drawer {
+  border-radius: 3px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+  border: solid 1px #e8e8e8;
+  background-color: #ffffff;
+  width: 221px;
+}
+
+.sidenav {
+  position: absolute;
+  top: 70px;
+  right: 0px;
+  bottom: 0px;
+  left: 0;
+  border-radius: 3px;
+  box-shadow: 10px 0 4px -2px rgba(0, 0, 0, 0.5);
+  border: solid 1px #484848;
+  background-color: #ffffff;
+  color: $dark-text;
+
+  &__content {
+    padding: 0.2rem 0;
+  }
+
+  &__label {
+    display: block;
+  }
+
+  &__standalone {
+    top: 130px;
+  }
+}

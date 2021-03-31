@@ -1,0 +1,20 @@
+<div class="table-contents-wrapper">
+  <p id="table-contents-title" class="table-contents__title">Table of Contents</p>
+  <p class="table-contents__section">{{ sectionTitle  }}</p>
+  <div class="table-contents__scrollable" cdk-scrollable #scrollElement>
+    <div class="table-contents__list" cdkDropList (cdkDropListDropped)="drop($event)">
+      <app-list-item
+        (updateTableItemEvent)="updateTableItem($event)"
+        (deleteEvent)="openDeleteConfirmation($event)"
+        [isEditMode]="isEditMode"
+        [item]="item"
+        cdkDrag
+        [cdkDragDisabled]="!isEditMode"
+        *ngFor="let item of data"
+        [cdkDragData]="item"
+        class="list-item-wrapper"
+      >
+      </app-list-item>
+    </div>
+  </div>
+</div>

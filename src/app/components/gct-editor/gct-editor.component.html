@@ -1,0 +1,18 @@
+
+<ng-container *ngIf="!(guidelineFacade.isLoading$ | async)">
+  <app-toolbar
+    (addAppendix)="addAppendixHandler()"
+    [guidelineType]="guidelineType"
+  >
+  </app-toolbar>
+  <app-sidebar
+    [isPreviewMode]="navigationFacade.isPreviewMode$ | async"
+    [isReviewMode]="navigationFacade.isReviewMode$ | async"
+    [guidelineId]="guidelineId"
+    [guidelineTypeId]="guidelineFacade.activeGuidelineTypeId$ | async"
+    [guidelineVersionId]="guidelineFacade.activeGuidelineVersionId$ | async"
+    [nodeMap]="nodeMap$ | async"
+  >
+  </app-sidebar>
+</ng-container>
+

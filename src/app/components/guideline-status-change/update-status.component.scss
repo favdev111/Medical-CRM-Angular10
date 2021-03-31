@@ -1,0 +1,24 @@
+@import '../../../variables';
+
+#updateStatusBtnContainer {
+  position:fixed;
+  bottom: 40px;
+  z-index: 2000;
+  right: 15px;
+  display: inline-flex;
+}
+
+.update-status-btn {
+  letter-spacing: $letter-spacing-lg;
+  float: right;
+  margin-left: 0.5rem;
+
+  &__icon {
+    margin-right: 0.2rem;
+  }
+
+}
+
+.update-status-btn:last-of-type {
+  margin: 0 0.4rem;
+}

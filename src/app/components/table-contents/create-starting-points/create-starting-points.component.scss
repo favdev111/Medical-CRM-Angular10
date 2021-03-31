@@ -1,0 +1,20 @@
+@import '../../../../variables';
+
+.create-starting-points {
+  width: 96%;
+  margin: 2rem auto 0 auto;
+
+  &__select {
+    width: 23rem;
+  }
+}
+
+.mat-menu-item, .mat-option {
+  font-size: 0.875rem !important;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.43;
+  letter-spacing: 0.25px;
+  color: $light-text;
+}

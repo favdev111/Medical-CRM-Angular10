@@ -1,0 +1,88 @@
+@import "../../../../variables";
+
+@mixin comment-text {
+  line-height: $line-height-lg;
+  letter-spacing: $letter-spacing-md;
+  font-size: $small-font;
+  color: $light-text;
+}
+
+.comments {
+  &__section-wrapper {
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  &__expanded-comment-wrapper {
+    padding: 0 0.5rem 0.5rem 0.5rem;
+    border-bottom: 1px solid lightgrey;
+  }
+
+  &__expanded-comment-title {
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  &__expanded-text {
+    @include comment-text;
+    padding-top: 0.3rem;
+  }
+
+  &__expanded-comment-actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+
+    img {
+      cursor: pointer;
+    }
+
+    button {
+      height: 100%;
+    }
+  }
+
+  &__list-item {
+    list-style: none;
+    padding: 0.1rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__text {
+    @include comment-text;
+  }
+
+  &__circle {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    align-self: center;
+  }
+
+  &__display-name {
+    padding-left: 0.4rem;
+  }
+}
+
+::ng-deep {
+  .mat-expansion-panel-header, .mat-list-item {
+    padding: 0 0.5rem !important;
+  }
+
+  .mat-list-item {
+    height: 100% !important;
+  }
+
+  .mat-expansion-panel-body {
+    padding: 0 !important;
+  }
+
+  .mat-list-item-content {
+    padding: 0 !important;
+    justify-content: space-between;
+  }
+}

@@ -1,0 +1,21 @@
+:host {
+    display: flex;
+  }
+  
+  * {
+    display: flex;
+  }
+  
+  .pop-tooltip {
+    // width: 18.438rem;
+    // height: 20.375rem;
+    // margin: 2.75rem 5.563rem 23.563rem 66rem;
+    // padding: 1.188rem 0.75rem;
+    position: absolute; 
+    right:15px; 
+    bottom: 42px;
+    border-radius: 4px;
+    box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2), 0 1px 18px 0
+    var(--dark-theme-states-on-primary-f-press), 0 6px 10px 0 rgba(0, 0, 0, 0.14);
+    background-color: var(--light-surface-ffffff);
+  }

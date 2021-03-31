@@ -1,0 +1,11 @@
+<div class="comments__expanded-comment-wrapper">
+  <div class="comments__expanded-comment-title">
+    <span class="comments__circle" appRandomColor [reviewUserId]="comment.reviewUserId"></span>
+    <span class="comments__display-name"> {{ comment.userDisplayName }} </span>
+  </div>
+  <p class="comments__text comments__text__expanded">{{ comment.content }}</p>
+  <div class="comments__expanded-comment-actions">
+    <img role="button" (click)="updateNodeCommentStatus(deniedFilter)" matRipple src="./assets/system-icon-outlined-icons-general-icon-close.svg"/>
+    <img role="button" (click)="updateNodeCommentStatus(acceptedFilter)" matRipple src="./assets/system-icon-outlined-icons-general-icon-checkmark.svg"/>
+  </div>
+</div>

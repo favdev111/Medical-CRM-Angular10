@@ -1,0 +1,39 @@
+#!groovy
+
+pipeline {
+    agent  { label 'docker-host'}
+    environment {
+        REGION = "us-west-2"
+    }
+    
+    stages {
+        stage ("build") {
+            steps {
+                sh ("curl -sL https://rpm.nodesource.com/setup_14.x | sudo bash - && sudo yum install -y nodejs ")
+                dir ("guidelinesConfigTool/") {
+                    sh ("npm install")
+                    sh ("npm install -g @angular/cli")
+                    sh ("ng build --prod --configuration ${TARGET_ENV}") 
+                }
+            }
+        }
+        stage ("deploy") {
+            steps {
+                script {
+                        if ( "${params.TARGET_ENV}" == "dev" ) {
+                            env.AWS_CREDENTIALS = "CDS_APPS_GINGER_AWS_KEY"
+                            env.S3_BUCKET_NAME = "cdsgctdev-astack-cds-guidelines-config-tool"
+                            
+                        } else if ("${params.TARGET_ENV}" == "test") {
+                            env.AWS_CREDENTIALS = "qa-cds-oa-system.deployer"
+                            env.S3_BUCKET_NAME = "cdsgctqa-astack-cds-guidelines-config-tool-ui"
+                        }
+                        withAWS(credentials: "${AWS_CREDENTIALS}", region: "${REGION}") { 
+                            sh "aws s3 cp --recursive guidelinesConfigTool/dist/guidelinesConfigTool/ s3://${S3_BUCKET_NAME}/"
+                            sh "aws cloudfront create-invalidation --distribution-id ${CLOUDFRONT_ID} --paths '/*' "
+                        }
+                    }
+                }
+            }
+        }
+}    

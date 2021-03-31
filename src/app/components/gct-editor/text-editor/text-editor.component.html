@@ -1,0 +1,44 @@
+<div class="editor-container">
+  <div class="title-container">
+    <h2 id="edit-node-title" class="title">Edit Textbox</h2>
+  </div>
+  <div class="text-editor">
+    <textarea id="text-editor"></textarea>
+  </div>
+  <div class="foot-notes">
+    <div class="foot-notes__container">
+      <p id="footnoteHeader">Footnotes</p>
+      <hr id="footnoteDivider" style="border: solid 1px #979797" />
+      <div class="foot-notes-content">
+        <ul>
+          <li style="margin: 0"
+            class="no-wrap"
+            *ngFor="let footnote of footnotes">
+            <div [innerHTML]="footnote.reference + ' ' + footnote.content"
+              class="footnoteList"></div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="editor">
+    <div class="editor__actions">
+      <button id="cancel-edit"
+        mat-button
+        mat-raised-button
+        class="btn__secondary"
+        (click)="onCancel()">
+        CANCEL
+      </button>
+      <button id="save-edit"
+        mat-button
+        mat-raised-button
+        (click)="onSave()"
+        class="btn__primary"
+        cdkFocusInitial>
+        SAVE
+      </button>
+    </div>
+  </div>
+</div>

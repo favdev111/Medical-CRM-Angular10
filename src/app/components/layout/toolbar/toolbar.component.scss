@@ -1,0 +1,64 @@
+@import '../../../../variables';
+/* Angular Material Overrides */
+
+.mat-toolbar {
+  background: #ffffff;
+  -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 2px 1px -1px rgba(0, 0, 0, 0.12), 0 1px 1px 0 rgba(0, 0, 0, 0.14);
+  -moz-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 2px 1px -1px rgba(0, 0, 0, 0.12), 0 1px 1px 0 rgba(0, 0, 0, 0.14);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 2px 1px -1px rgba(0, 0, 0, 0.12), 0 1px 1px 0 rgba(0, 0, 0, 0.14);
+  border-radius: 3px;
+  height: 70px;
+}
+
+/* Custom styles */
+
+.title {
+  flex: 1 1 auto;
+  text-align: center;
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: 0.5px;
+  color: rgba(0, 0, 0, 0.87);
+  margin-right: -12%;
+}
+
+.icon-group {
+  margin: 0 0.8rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  // Fix ripple effect overlay on svg icon buttons
+  ::ng-deep .mat-button-ripple-round, ::ng-deep .mat-button-focus-overlay {
+    top: 5px;
+    bottom: -5px;
+  }
+
+  &__icon {
+    padding-top: 25%;
+  }
+
+  &__text {
+    font-size: $xs-font;
+    color: $light-text;
+  }
+}
+
+.is-preview-mode {
+  background-color: $primary;
+  .title {
+    color: $secondary;
+  }
+  .icon-group {
+    &__icon {
+      filter: invert(1);
+    }
+    &__text {
+      color: $secondary;
+    }
+  }
+}

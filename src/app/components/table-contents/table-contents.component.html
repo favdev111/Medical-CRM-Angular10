@@ -1,0 +1,29 @@
+<div class="table-contents">
+  <div class="table-contents__edit">
+    <mat-tab-group disablePagination dynamicHeight #tabGroup>
+      <mat-tab class="mat-elevation-z0">
+        <ng-template mat-tab-label>
+          <img [src]="tabGroup.selectedIndex === 0 ? './assets/table-contents-tab-icon-blue.svg' : './assets/table-contents-tab-icon-grey.svg'" />
+        </ng-template>
+        <app-table-contents-list [isEditMode]="isEditMode" [data]="startingPoints$ | async" sectionTitle="Starting points"></app-table-contents-list>
+      </mat-tab>
+      <mat-tab class="mat-elevation-z0">
+        <ng-template mat-tab-label>
+          <img [src]="tabGroup.selectedIndex === 1 ? './assets/comment-tab-icon-blue.svg' : './assets/comment-tab-icon-grey.svg'" />
+        </ng-template>
+        <app-comments></app-comments>
+      </mat-tab>
+      <mat-tab disabled>
+        <ng-template mat-tab-label>
+          <button [matMenuTriggerFor]="editMenu" mat-icon-button aria-label="Edit Table of Contents">
+            <img src="./assets/ellipses.svg" />
+          </button>
+          <mat-menu #editMenu="matMenu">
+            <button mat-menu-item (click)="close()">Close</button>
+            <button *ngIf="!isPreviewMode" mat-menu-item (click)="toggleEditMode()" [ngClass]="{'table-contents__edit-blue': isEditMode}">Edit</button>
+          </mat-menu>
+        </ng-template>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>

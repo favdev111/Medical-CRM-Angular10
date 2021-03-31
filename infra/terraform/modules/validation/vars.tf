@@ -1,0 +1,1 @@
+variable "gct_ui_cert_arn"{}

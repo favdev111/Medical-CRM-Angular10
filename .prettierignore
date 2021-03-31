@@ -1,0 +1,11 @@
+# Add files here to ignore them from prettier formatting
+/compodoc/*
+/coverage/*
+/infra/*
+/node_modules/*
+/packages/*
+/json-server/*
+/tools/*
+angular.json
+nx.json
+package.json
