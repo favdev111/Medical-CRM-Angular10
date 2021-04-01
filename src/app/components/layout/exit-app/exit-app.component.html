@@ -1,4 +1,31 @@
-<a mat-button (click)="switchApp(GDL_UUID)" class="link" target="_parent">
-  <img src="./assets/back_button.svg" height="15" />
-  Guidelines App
-</a>
+<div class="custom-status-menu">
+  <div class="status-left">
+    <a mat-button (click)="switchApp(GDL_UUID)" class="link" target="_parent">
+      <img src="./assets/back_button.svg" height="30" />
+    </a>
+    <div class="status-title">
+      <img src="./assets/file-present-24-px.svg" height="30" />
+      <span>Guidelines Configuration Module</span>
+    </div>
+  </div>
+  <div>
+    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+      <span>HELP & MORE</span>
+      <mat-icon>arrow_drop_down</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>
+        <a [routerLink]="'/about-app'">
+          About this app
+        </a>
+      </button>
+      <button mat-menu-item>
+        <span>Help with this app</span>
+      </button>
+      <button mat-menu-item>
+        <span>Release history</span>
+      </button>
+    </mat-menu>
+  </div>
+  
+</div>

@@ -17,6 +17,8 @@ import { D3Service } from './d3';
 import { HttpSnackbarInterceptor } from 'src/app/interceptors/http-snackbar.interceptor';
 import { AppAuthInterceptor } from './interceptors/auth.interceptor';
 import { HostService } from './services/host.service';
+import { AboutAppComponent } from './components/about-app/about-app.component';
+import { APP_BASE_HREF } from '@angular/common';
 
 // NAP Modules
 //import { MessageDecoder, MessageEncoder } from '@nap/platform';
@@ -46,7 +48,7 @@ import { HostService } from './services/host.service';
 // ];
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, AboutAppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -81,6 +83,9 @@ import { HostService } from './services/host.service';
       useClass: HttpSnackbarInterceptor,
       multi: true
     },
+    {
+      provide: APP_BASE_HREF, useValue: '/guidelines-config-tool-ui/index.html'
+    }
     // { provide: APP_CONFIG, useValue: GCT_APP_CONFIG }
   ],
   bootstrap: [AppComponent]

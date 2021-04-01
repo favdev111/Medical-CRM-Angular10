@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+    <g fill="none" fill-rule="evenodd">
+        <g>
+            <g>
+                <g>
+                    <path d="M0 0L32 0 32 32 0 32z" transform="translate(-96 -83) translate(0 75) translate(96 8)"/>
+                    <g>
+                        <path fill="#5EB7FF" fill-rule="nonzero" d="M13.333 0H2.667C1.2 0 0 1.2 0 2.667V24c0 1.467 1.2 2.667 2.667 2.667h16c1.466 0 2.666-1.2 2.666-2.667V8l-8-8zm5.334 24h-16V2.667h10.666V8h5.334v16z" transform="translate(-96 -83) translate(0 75) translate(96 8) translate(5.333 2.667)"/>
+                        <g>
+                            <path d="M4.267 16.4L4.267 17.2 4.933 17.2 11.733 10.4 10.933 9.6z" transform="translate(-96 -83) translate(0 75) translate(96 8) translate(5.333 2.667) translate(2.667 2.667)"/>
+                            <path fill="#8ECBFF" fill-rule="nonzero" d="M10.667 5.333V0H0v21.333h16v-16h-5.333zM4.933 17.2h-.666v-.667l6.8-6.8.666.667-6.8 6.8z" opacity=".6" transform="translate(-96 -83) translate(0 75) translate(96 8) translate(5.333 2.667) translate(2.667 2.667)"/>
+                            <path fill="#5EB7FF" fill-rule="nonzero" d="M14.267 8.933L12.533 7.2c-.133-.133-.266-.133-.533-.133s-.4 0-.533.133l-.934.933L2.667 16v2.667h2.666l7.467-7.6 1.2-1.2c.4-.267.4-.667.267-.934zM4.933 17.2h-.666v-.667l6.8-6.8.666.667-6.8 6.8z" transform="translate(-96 -83) translate(0 75) translate(96 8) translate(5.333 2.667) translate(2.667 2.667)"/>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

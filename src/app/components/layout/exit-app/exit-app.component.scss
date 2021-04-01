@@ -1,3 +1,4 @@
+@import '../../../../variables';
 .link {
   font-family: Roboto;
   font-size: 14px;
@@ -5,5 +6,31 @@
   font-stretch: normal;
   font-style: normal;
   letter-spacing: 1.25px;
-  color: #0066cc;
+}
+::ng-deep .mat-form-field-underline {
+  display: none;
+}
+.custom-status-menu {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2px 20px;
+  .status-left {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .status-title {
+      display: flex;
+      align-items: center;
+    }
+    span {
+      font-size: $xl-font;
+      color: #5eb7ff;
+      font-weight: $font-weight-medium;
+    }
+  }
+  .mat-icon-button {
+    width: 100%;
+    color: $primary;
+  }
 }

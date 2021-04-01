@@ -41,5 +41,4 @@ export class ExitAppComponent implements OnInit {
       '*' //or "www.parentpage.com"
     );
   }
-
 }
