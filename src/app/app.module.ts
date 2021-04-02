@@ -83,9 +83,6 @@ import { APP_BASE_HREF } from '@angular/common';
       useClass: HttpSnackbarInterceptor,
       multi: true
     },
-    {
-      provide: APP_BASE_HREF, useValue: '/guidelines-config-tool-ui/index.html'
-    }
     // { provide: APP_CONFIG, useValue: GCT_APP_CONFIG }
   ],
   bootstrap: [AppComponent]

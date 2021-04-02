@@ -1,3 +1,4 @@
+<app-exit-app *ngIf="!(navigationFacade.isStandAloneMode$ | async)"></app-exit-app>
 <div class="element-container" fxLayout="column">  
   <app-responsive-navbar *ngIf="navigationFacade.isStandAloneMode$ | async"></app-responsive-navbar>
   <router-outlet></router-outlet>
